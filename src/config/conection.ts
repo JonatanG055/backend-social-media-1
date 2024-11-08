@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
-const conection=async()=>{
-    try {
-        //Rememeber change your database
-        //in this case it`s social in your case it will be your database
-        await mongoose.connect('mongodb://127.0.0.1:27017/social')
-        console.log("Connection succesfull");
-    } catch (error) {
-        console.log(error);
-    }
-}
-export {conection}
+import mongoose from 'mongoose';
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect('mongodb+srv://jonatan:ixYlrmr86UGG1Stx@dbd.r6k7h5w.mongodb.net/BACKEND-SOCIAL-MEDIA');
+    console.log('Conexión exitosa a la base de datos');
+  } catch (error) {
+    console.error('Error al conectar a la base de datos:', (error as any).message);
+  }
+};
+
+export default connectDB;

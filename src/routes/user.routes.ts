@@ -1,6 +1,15 @@
-import UserController from "../controllers/UserController";
-import { Router} from "express";
-const app=Router()
-app.get("/user-register/save",UserController.userRegister)
-app.post("/user-login",UserController.userLogin)
-export default app
+// routes/userRoutes.ts
+import { Router } from 'express';
+import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from '../controllers/UserController';
+import { registerUser } from '../controllers/UserController';
+
+const router = Router();
+
+router.get('/users', getAllUsers);
+router.get('/users/:id', getUserById);
+router.post('/users', createUser);
+router.put('/users/:id', updateUser);
+router.delete('/users/:id', deleteUser);
+router.post('/users/register', registerUser);
+
+export default router;

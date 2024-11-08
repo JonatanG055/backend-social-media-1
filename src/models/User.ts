@@ -1,41 +1,22 @@
-import {  Schema,Document, model} from "mongoose";
+// models/user.ts
+import { Schema, model, Document } from 'mongoose';
 
-interface UserInterface extends Document{
-    name:string,
-    surname:string,
-    password:string,
-    role:string,
-    image:string,
-    created_at:Date
+interface IUser extends Document {
+    name: string;
+    nick: string;
+    password: string;
+    role: string;
+    image?: string;
+    created_at: Date;
 }
 
+const userSchema = new Schema<IUser>({
+    name: { type: String, required: true },
+    nick: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, default: 'user' },
+    image: { type: String, default: null },
+    created_at: { type: Date, default: Date.now }
+});
 
-const UserModel=new Schema<UserInterface>({
-    name:{
-        type:String,
-        required:true
-    },
-    surname:{
-        type:String
-    },
-    password:{
-        type:String,
-        required:true
-    },
-    role:{
-        type:String,
-        default:"administrator"
-    },
-    image:{
-        type:String,
-        default:"image_user"
-    },
-    created_at:{
-        type:Date
-    }
-
-})
-
-const User = model<UserInterface>('User',UserModel)
-
-export default User
+export default model<IUser>('User', userSchema);
